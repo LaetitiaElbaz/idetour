@@ -22,6 +22,16 @@ class Category
      */
     private $categoryName;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $aupdatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class Category
     public function setCategoryName(string $categoryName): self
     {
         $this->categoryName = $categoryName;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAupdatedAt(): ?\DateTimeInterface
+    {
+        return $this->aupdatedAt;
+    }
+
+    public function setAupdatedAt(?\DateTimeInterface $aupdatedAt): self
+    {
+        $this->aupdatedAt = $aupdatedAt;
 
         return $this;
     }
