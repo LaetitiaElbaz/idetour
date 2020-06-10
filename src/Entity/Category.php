@@ -30,7 +30,7 @@ class Category
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $aupdatedAt;
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -63,12 +63,12 @@ class Category
 
     public function getAupdatedAt(): ?\DateTimeInterface
     {
-        return $this->aupdatedAt;
+        return $this->updatedAt;
     }
 
-    public function setAupdatedAt(?\DateTimeInterface $aupdatedAt): self
+    public function setupdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->aupdatedAt = $aupdatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
