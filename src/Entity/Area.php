@@ -42,6 +42,11 @@ class Area
      */
     private $areaSlug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="areas")
+     */
+    private $country;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Area
     public function setAreaSlug(?string $areaSlug): self
     {
         $this->areaSlug = $areaSlug;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

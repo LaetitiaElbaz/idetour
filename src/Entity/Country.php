@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CountryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Country
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $countrySlug;
+
+    /**
+     * @ORM\OneToMany(targetEntity=area::class, mappedBy="country")
+     */
+    private $areas;
+
+    public function __construct()
+    {
+        $this->areas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,37 @@ class Country
     public function setCountrySlug(?string $countrySlug): self
     {
         $this->countrySlug = $countrySlug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|area[]
+     */
+    public function getAreas(): Collection
+    {
+        return $this->areas;
+    }
+
+    public function addArea(area $area): self
+    {
+        if (!$this->areas->contains($area)) {
+            $this->areas[] = $area;
+            $area->setCountry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArea(area $area): self
+    {
+        if ($this->areas->contains($area)) {
+            $this->areas->removeElement($area);
+            // set the owning side to null (unless already changed)
+            if ($area->getCountry() === $this) {
+                $area->setCountry(null);
+            }
+        }
 
         return $this;
     }
