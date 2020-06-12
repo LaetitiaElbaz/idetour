@@ -35,7 +35,7 @@ class Period
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=5)
      */
     private $hours;
 
@@ -52,6 +52,7 @@ class Period
     public function __construct()
     {
         $this->offers = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -95,12 +96,12 @@ class Period
         return $this;
     }
 
-    public function getHours(): ?\DateTimeInterface
+    public function getHours(): ?string
     {
         return $this->hours;
     }
 
-    public function setHours(\DateTimeInterface $hours): self
+    public function setHours(string $hours): self
     {
         $this->hours = $hours;
 

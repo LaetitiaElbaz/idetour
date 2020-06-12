@@ -52,6 +52,8 @@ class Country
     public function __construct()
     {
         $this->areas = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+
     }
 
     public function getId(): ?int

@@ -42,6 +42,7 @@ class Category
     public function __construct()
     {
         $this->pois = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

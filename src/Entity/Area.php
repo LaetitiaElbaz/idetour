@@ -57,6 +57,7 @@ class Area
     public function __construct()
     {
         $this->departments = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -57,6 +57,7 @@ class Department
     public function __construct()
     {
         $this->cities = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -42,6 +42,11 @@ class Price
      */
     private $audience;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
