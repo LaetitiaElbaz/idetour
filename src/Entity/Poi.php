@@ -64,9 +64,15 @@ class Poi
      */
     private $categories;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="pois")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +199,34 @@ class Poi
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
             $category->removePoi($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+            $tag->addPoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+            $tag->removePoi($this);
         }
 
         return $this;
