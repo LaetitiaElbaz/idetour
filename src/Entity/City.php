@@ -52,6 +52,11 @@ class City
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="cities")
+     */
+    private $department;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +142,18 @@ class City
     public function setCitySlug(?string $citySlug): self
     {
         $this->citySlug = $citySlug;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }
