@@ -33,6 +33,11 @@ class Department
     private $createdAt;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $departmentSlug;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -86,6 +91,18 @@ class Department
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getDepartmentSlug(): ?string
+    {
+        return $this->departmentSlug;
+    }
+
+    public function setDepartmentSlug(?string $departmentSlug): self
+    {
+        $this->departmentSlug = $departmentSlug;
 
         return $this;
     }

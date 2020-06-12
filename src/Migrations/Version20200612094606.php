@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200610124634 extends AbstractMigration
+final class Version20200612094606 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20200610124634 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE category CHANGE aupdated_at updated_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE city ADD city_gps_lat NUMERIC(10, 6) DEFAULT NULL, ADD city_gps_lng NUMERIC(10, 6) DEFAULT NULL, ADD city_slug VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20200610124634 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE category CHANGE updated_at aupdated_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE city DROP city_gps_lat, DROP city_gps_lng, DROP city_slug');
     }
 }

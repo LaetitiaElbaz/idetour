@@ -28,6 +28,21 @@ class City
     private $cityName;
 
     /**
+     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
+     */
+    private $cityGpsLat;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
+     */
+    private $cityGpsLng;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $citySlug;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -86,6 +101,42 @@ class City
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCityGpsLat(): ?string
+    {
+        return $this->cityGpsLat;
+    }
+
+    public function setCityGpsLat(?string $cityGpsLat): self
+    {
+        $this->cityGpsLat = $cityGpsLat;
+
+        return $this;
+    }
+
+    public function getCityGpsLng(): ?string
+    {
+        return $this->cityGpsLng;
+    }
+
+    public function setCityGpsLng(?string $cityGpsLng): self
+    {
+        $this->cityGpsLng = $cityGpsLng;
+
+        return $this;
+    }
+
+    public function getCitySlug(): ?string
+    {
+        return $this->citySlug;
+    }
+
+    public function setCitySlug(?string $citySlug): self
+    {
+        $this->citySlug = $citySlug;
 
         return $this;
     }

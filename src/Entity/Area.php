@@ -37,6 +37,11 @@ class Area
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $areaSlug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Area
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAreaSlug(): ?string
+    {
+        return $this->areaSlug;
+    }
+
+    public function setAreaSlug(?string $areaSlug): self
+    {
+        $this->areaSlug = $areaSlug;
 
         return $this;
     }

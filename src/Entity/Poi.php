@@ -35,17 +35,17 @@ class Poi
     /**
      * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
      */
-    private $latitude;
+    private $poiGpsLat;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
      */
-    private $longitude;
+    private $poiGpsLng;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $slug;
+    private $poiSlug;
 
     /**
      * @ORM\Column(type="datetime")
@@ -98,38 +98,38 @@ class Poi
         return $this;
     }
 
-    public function getLatitude(): ?string
+    public function getpoiGpsLat(): ?string
     {
-        return $this->latitude;
+        return $this->poiGpsLat;
     }
 
-    public function setLatitude(?string $latitude): self
+    public function setpoiGpsLat(?string $poiGpsLat): self
     {
-        $this->latitude = $latitude;
+        $this->poiGpsLat = $poiGpsLat;
 
         return $this;
     }
 
-    public function getLongitude(): ?string
+    public function getpoiGpsLng(): ?string
     {
-        return $this->longitude;
+        return $this->poiGpsLng;
     }
 
-    public function setLongitude(?string $longitude): self
+    public function setpoiGpsLng(?string $poiGpsLng): self
     {
-        $this->longitude = $longitude;
+        $this->poiGpsLng = $poiGpsLng;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getPoiSlug(): ?string
     {
-        return $this->slug;
+        return $this->poiSlug;
     }
 
-    public function setSlug(?string $slug): self
+    public function setPoiSlug(?string $poiSlug): self
     {
-        $this->slug = $slug;
+        $this->poiSlug = $poiSlug;
 
         return $this;
     }

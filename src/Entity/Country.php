@@ -37,6 +37,11 @@ class Country
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $countrySlug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Country
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCountrySlug(): ?string
+    {
+        return $this->countrySlug;
+    }
+
+    public function setCountrySlug(?string $countrySlug): self
+    {
+        $this->countrySlug = $countrySlug;
 
         return $this;
     }
