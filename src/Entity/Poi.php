@@ -79,11 +79,17 @@ class Poi
      */
     private $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity=offer::class, mappedBy="poi")
+     */
+    private $offers;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -279,6 +285,37 @@ class Poi
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setPoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getPoi() === $this) {
+                $offer->setPoi(null);
+            }
+        }
 
         return $this;
     }

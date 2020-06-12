@@ -39,6 +39,11 @@ class Offer
      */
     private $periods;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Poi::class, inversedBy="offers")
+     */
+    private $poi;
+
     public function __construct()
     {
         $this->periods = new ArrayCollection();
@@ -109,6 +114,18 @@ class Offer
             $this->periods->removeElement($period);
             $period->removeOffer($this);
         }
+
+        return $this;
+    }
+
+    public function getPoi(): ?Poi
+    {
+        return $this->poi;
+    }
+
+    public function setPoi(?Poi $poi): self
+    {
+        $this->poi = $poi;
 
         return $this;
     }
