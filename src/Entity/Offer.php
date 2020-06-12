@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Offer
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Period::class, mappedBy="offers")
+     */
+    private $periods;
+
+    public function __construct()
+    {
+        $this->periods = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,34 @@ class Offer
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Period[]
+     */
+    public function getPeriods(): Collection
+    {
+        return $this->periods;
+    }
+
+    public function addPeriod(Period $period): self
+    {
+        if (!$this->periods->contains($period)) {
+            $this->periods[] = $period;
+            $period->addOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePeriod(Period $period): self
+    {
+        if ($this->periods->contains($period)) {
+            $this->periods->removeElement($period);
+            $period->removeOffer($this);
+        }
 
         return $this;
     }
