@@ -42,6 +42,11 @@ class Department
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="departments")
+     */
+    private $area;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Department
     public function setDepartmentSlug(?string $departmentSlug): self
     {
         $this->departmentSlug = $departmentSlug;
+
+        return $this;
+    }
+
+    public function getArea(): ?Area
+    {
+        return $this->area;
+    }
+
+    public function setArea(?Area $area): self
+    {
+        $this->area = $area;
 
         return $this;
     }
