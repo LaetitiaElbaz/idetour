@@ -42,6 +42,11 @@ class Comment
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Poi::class, inversedBy="comments")
+     */
+    private $poi;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Comment
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPoi(): ?Poi
+    {
+        return $this->poi;
+    }
+
+    public function setPoi(?Poi $poi): self
+    {
+        $this->poi = $poi;
 
         return $this;
     }
