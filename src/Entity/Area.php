@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AreaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Area
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $areaSlug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="areas")
+     */
+    private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity=department::class, mappedBy="area")
+     */
+    private $departments;
+
+    public function __construct()
+    {
+        $this->departments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +120,49 @@ class Area
     public function setAreaSlug(?string $areaSlug): self
     {
         $this->areaSlug = $areaSlug;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|department[]
+     */
+    public function getDepartments(): Collection
+    {
+        return $this->departments;
+    }
+
+    public function addDepartment(department $department): self
+    {
+        if (!$this->departments->contains($department)) {
+            $this->departments[] = $department;
+            $department->setArea($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartment(department $department): self
+    {
+        if ($this->departments->contains($department)) {
+            $this->departments->removeElement($department);
+            // set the owning side to null (unless already changed)
+            if ($department->getArea() === $this) {
+                $department->setArea(null);
+            }
+        }
 
         return $this;
     }

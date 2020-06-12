@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PeriodRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Period
      * @ORM\Column(type="string", length=10)
      */
     private $month;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=offer::class, inversedBy="periods")
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,32 @@ class Period
     public function setMonth(string $month): self
     {
         $this->month = $month;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+        }
 
         return $this;
     }

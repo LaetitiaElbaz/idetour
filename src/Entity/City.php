@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,21 @@ class City
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="cities")
+     */
+    private $department;
+
+    /**
+     * @ORM\OneToMany(targetEntity=poi::class, mappedBy="city")
+     */
+    private $pois;
+
+    public function __construct()
+    {
+        $this->pois = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +154,49 @@ class City
     public function setCitySlug(?string $citySlug): self
     {
         $this->citySlug = $citySlug;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|poi[]
+     */
+    public function getPois(): Collection
+    {
+        return $this->pois;
+    }
+
+    public function addPoi(poi $poi): self
+    {
+        if (!$this->pois->contains($poi)) {
+            $this->pois[] = $poi;
+            $poi->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePoi(poi $poi): self
+    {
+        if ($this->pois->contains($poi)) {
+            $this->pois->removeElement($poi);
+            // set the owning side to null (unless already changed)
+            if ($poi->getCity() === $this) {
+                $poi->setCity(null);
+            }
+        }
 
         return $this;
     }

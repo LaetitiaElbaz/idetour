@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DepartmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Department
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="departments")
+     */
+    private $area;
+
+    /**
+     * @ORM\OneToMany(targetEntity=city::class, mappedBy="department")
+     */
+    private $cities;
+
+    public function __construct()
+    {
+        $this->cities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +120,49 @@ class Department
     public function setDepartmentSlug(?string $departmentSlug): self
     {
         $this->departmentSlug = $departmentSlug;
+
+        return $this;
+    }
+
+    public function getArea(): ?Area
+    {
+        return $this->area;
+    }
+
+    public function setArea(?Area $area): self
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|city[]
+     */
+    public function getCities(): Collection
+    {
+        return $this->cities;
+    }
+
+    public function addCity(city $city): self
+    {
+        if (!$this->cities->contains($city)) {
+            $this->cities[] = $city;
+            $city->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCity(city $city): self
+    {
+        if ($this->cities->contains($city)) {
+            $this->cities->removeElement($city);
+            // set the owning side to null (unless already changed)
+            if ($city->getDepartment() === $this) {
+                $city->setDepartment(null);
+            }
+        }
 
         return $this;
     }
