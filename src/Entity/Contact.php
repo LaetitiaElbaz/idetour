@@ -54,6 +54,11 @@ class Contact
      */
     private $roles;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Poi::class, inversedBy="contacts")
+     */
+    private $poi;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -160,6 +165,18 @@ class Contact
             $this->roles->removeElement($role);
             $role->removeContact($this);
         }
+
+        return $this;
+    }
+
+    public function getPoi(): ?Poi
+    {
+        return $this->poi;
+    }
+
+    public function setPoi(?Poi $poi): self
+    {
+        $this->poi = $poi;
 
         return $this;
     }

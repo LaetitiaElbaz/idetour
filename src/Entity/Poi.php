@@ -89,6 +89,11 @@ class Poi
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=contact::class, mappedBy="poi")
+     */
+    private $contacts;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -96,6 +101,7 @@ class Poi
         $this->reviews = new ArrayCollection();
         $this->offers = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -351,6 +357,37 @@ class Poi
             // set the owning side to null (unless already changed)
             if ($comment->getPoi() === $this) {
                 $comment->setPoi(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|contact[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->setPoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(contact $contact): self
+    {
+        if ($this->contacts->contains($contact)) {
+            $this->contacts->removeElement($contact);
+            // set the owning side to null (unless already changed)
+            if ($contact->getPoi() === $this) {
+                $contact->setPoi(null);
             }
         }
 
