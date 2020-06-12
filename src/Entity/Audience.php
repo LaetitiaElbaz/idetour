@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AudienceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Audience
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="audience")
+     */
+    private $prices;
+
+    public function __construct()
+    {
+        $this->prices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,37 @@ class Audience
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Price[]
+     */
+    public function getPrices(): Collection
+    {
+        return $this->prices;
+    }
+
+    public function addPrice(Price $price): self
+    {
+        if (!$this->prices->contains($price)) {
+            $this->prices[] = $price;
+            $price->setAudience($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrice(Price $price): self
+    {
+        if ($this->prices->contains($price)) {
+            $this->prices->removeElement($price);
+            // set the owning side to null (unless already changed)
+            if ($price->getAudience() === $this) {
+                $price->setAudience(null);
+            }
+        }
 
         return $this;
     }

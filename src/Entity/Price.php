@@ -32,6 +32,16 @@ class Price
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=offer::class, inversedBy="prices")
+     */
+    private $offer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=audience::class, inversedBy="prices")
+     */
+    private $audience;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +79,30 @@ class Price
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getOffer(): ?offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?offer $offer): self
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    public function getAudience(): ?audience
+    {
+        return $this->audience;
+    }
+
+    public function setAudience(?audience $audience): self
+    {
+        $this->audience = $audience;
 
         return $this;
     }

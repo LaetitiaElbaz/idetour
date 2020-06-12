@@ -44,9 +44,15 @@ class Offer
      */
     private $poi;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="offer")
+     */
+    private $prices;
+
     public function __construct()
     {
         $this->periods = new ArrayCollection();
+        $this->prices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,37 @@ class Offer
     public function setPoi(?Poi $poi): self
     {
         $this->poi = $poi;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Price[]
+     */
+    public function getPrices(): Collection
+    {
+        return $this->prices;
+    }
+
+    public function addPrice(Price $price): self
+    {
+        if (!$this->prices->contains($price)) {
+            $this->prices[] = $price;
+            $price->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrice(Price $price): self
+    {
+        if ($this->prices->contains($price)) {
+            $this->prices->removeElement($price);
+            // set the owning side to null (unless already changed)
+            if ($price->getOffer() === $this) {
+                $price->setOffer(null);
+            }
+        }
 
         return $this;
     }
