@@ -32,6 +32,16 @@ class Period
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $hours;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $month;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +79,30 @@ class Period
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getHours(): ?\DateTimeInterface
+    {
+        return $this->hours;
+    }
+
+    public function setHours(\DateTimeInterface $hours): self
+    {
+        $this->hours = $hours;
+
+        return $this;
+    }
+
+    public function getMonth(): ?string
+    {
+        return $this->month;
+    }
+
+    public function setMonth(string $month): self
+    {
+        $this->month = $month;
 
         return $this;
     }
