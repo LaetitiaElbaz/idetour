@@ -69,10 +69,16 @@ class Poi
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Review::class, mappedBy="pois")
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,6 +233,34 @@ class Poi
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
             $tag->removePoi($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->addPoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            $review->removePoi($this);
         }
 
         return $this;
