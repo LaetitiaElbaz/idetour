@@ -74,6 +74,11 @@ class Poi
      */
     private $reviews;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="pois")
+     */
+    private $city;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -262,6 +267,18 @@ class Poi
             $this->reviews->removeElement($review);
             $review->removePoi($this);
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
