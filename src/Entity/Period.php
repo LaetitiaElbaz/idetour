@@ -59,10 +59,16 @@ class Period
      */
     private $offers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Days::class, mappedBy="periods")
+     */
+    private $days;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->days = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +181,34 @@ class Period
     {
         if ($this->offers->contains($offer)) {
             $this->offers->removeElement($offer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Days[]
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Days $day): self
+    {
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
+            $day->addPeriod($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDay(Days $day): self
+    {
+        if ($this->days->contains($day)) {
+            $this->days->removeElement($day);
+            $day->removePeriod($this);
         }
 
         return $this;

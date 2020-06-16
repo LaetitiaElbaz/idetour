@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DaysRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,9 +34,15 @@ class Days
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Period::class, inversedBy="days")
+     */
+    private $periods;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->periods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,6 +82,32 @@ class Days
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Period[]
+     */
+    public function getPeriods(): Collection
+    {
+        return $this->periods;
+    }
+
+    public function addPeriod(Period $period): self
+    {
+        if (!$this->periods->contains($period)) {
+            $this->periods[] = $period;
+        }
+
+        return $this;
+    }
+
+    public function removePeriod(Period $period): self
+    {
+        if ($this->periods->contains($period)) {
+            $this->periods->removeElement($period);
+        }
 
         return $this;
     }
