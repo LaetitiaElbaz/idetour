@@ -13,17 +13,17 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        // return $this->render('home/index.html.twig', [
-        //     'controller_name' => 'HomeController',
-        // ]);
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
 
-        return new \Symfony\Component\HttpFoundation\Response(<<<EOF
-<html>
-    <body>
-        <img src="/images/under-construction.gif" />
-    </body>
-</html>
-EOF
-        );
+//         return new \Symfony\Component\HttpFoundation\Response(<<<EOF
+// <html>
+//     <body>
+//         <img src="/images/under-construction.gif" />
+//     </body>
+// </html>
+// EOF
+//         );
     }
 }
