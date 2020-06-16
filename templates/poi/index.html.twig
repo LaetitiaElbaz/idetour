@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poi index{% endblock %}
+
+{% block body %}
+    <h1>Liste des Poi</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PoiName</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>PoiGpsLat</th>
+                <th>PoiGpsLng</th>
+                <th>PoiSlug</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poi in pois %}
+            <tr>
+                <td>{{ poi.id }}</td>
+                <td>{{ poi.poiName }}</td>
+                <td>{{ poi.description }}</td>
+                <td>{{ poi.address }}</td>
+                <td>{{ poi.poiGpsLat }}</td>
+                <td>{{ poi.poiGpsLng }}</td>
+                <td>{{ poi.poiSlug }}</td>
+                <td>{{ poi.createdAt ? poi.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ poi.updatedAt ? poi.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('poi_show', {'id': poi.id}) }}">show</a>
+                    <a href="{{ path('poi_edit', {'id': poi.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('poi_new') }}">Create new</a>
+{% endblock %}
