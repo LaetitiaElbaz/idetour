@@ -20,9 +20,29 @@ class Period
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=8)
+     * @ORM\Column(type="string", length=255)
      */
-    private $day;
+    private $periodName;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $startTime;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $endTime;
 
     /**
      * @ORM\Column(type="datetime")
@@ -35,24 +55,20 @@ class Period
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private $hours;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $month;
-
-    /**
      * @ORM\ManyToMany(targetEntity=offer::class, inversedBy="periods")
      */
     private $offers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Days::class, mappedBy="periods")
+     */
+    private $days;
 
     public function __construct()
     {
         $this->offers = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->days = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,14 +76,62 @@ class Period
         return $this->id;
     }
 
-    public function getDay(): ?string
+    public function getPeriodName(): ?string
     {
-        return $this->day;
+        return $this->periodName;
     }
 
-    public function setDay(string $day): self
+    public function setPeriodName(string $periodName): self
     {
-        $this->day = $day;
+        $this->periodName = $periodName;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): self
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(?\DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    public function getEndTime(): ?\DateTimeInterface
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(?\DateTimeInterface $endTime): self
+    {
+        $this->endTime = $endTime;
 
         return $this;
     }
@@ -92,30 +156,6 @@ class Period
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getHours(): ?string
-    {
-        return $this->hours;
-    }
-
-    public function setHours(string $hours): self
-    {
-        $this->hours = $hours;
-
-        return $this;
-    }
-
-    public function getMonth(): ?string
-    {
-        return $this->month;
-    }
-
-    public function setMonth(string $month): self
-    {
-        $this->month = $month;
 
         return $this;
     }
@@ -145,4 +185,33 @@ class Period
 
         return $this;
     }
+
+    /**
+     * @return Collection|Days[]
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Days $day): self
+    {
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
+            $day->addPeriod($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDay(Days $day): self
+    {
+        if ($this->days->contains($day)) {
+            $this->days->removeElement($day);
+            $day->removePeriod($this);
+        }
+
+        return $this;
+    }
+
 }
