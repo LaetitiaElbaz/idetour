@@ -9,6 +9,7 @@ use App\Entity\City;
 use App\Entity\Comment;
 use App\Entity\Contact;
 use App\Entity\Country;
+use App\Entity\Days;
 use App\Entity\Department;
 use App\Entity\Offer;
 use App\Entity\Period;
@@ -48,66 +49,62 @@ class AppFixtures extends Fixture
         $senior->setAgeGroup('Senior');
         $manager->persist($senior);
 
-        // Create some period
-        $lundi = new Period();
+        // Create some days
+        $lundi = new Days;
         $lundi->setDay('Lundi');
         $manager->persist($lundi);
 
-        $mardi = new Period();
+        $mardi = new Days();
         $mardi->setDay('Mardi');
         $manager->persist($mardi);
 
-        $mercredi = new Period();
+        $mercredi = new Days();
         $mercredi->setDay('Mercredi');
         $manager->persist($mercredi);
 
-        $jeudi = new Period();
+        $jeudi = new Days();
         $jeudi->setDay('Jeudi');
         $manager->persist($jeudi);
 
-        $vendredi = new Period();
+        $vendredi = new Days();
         $vendredi->setDay('Vendredi');
         $manager->persist($vendredi);
 
-        $samedi = new Period();
+        $samedi = new Days();
         $samedi->setDay('Samedi');
         $manager->persist($samedi);
 
-        $dimanche = new Period();
+        $dimanche = new Days();
         $dimanche->setDay('Dimanche');
         $manager->persist($dimanche);
 
-        $janvier = new Period();
-        $janvier->setMonth('Janvier');
-        $manager->persist($janvier);
+        // Create some period
+        $estivale = new Period();
+        $estivale->setPeriodName('estivale');
+        $estivale->setStartDate(new \DateTime(2020-06-15, new \DateTimeZone('UTC')));
+        $estivale->setEndDate(new \DateTime(2020-20-30, new \DateTimeZone('UTC')));
+        $estivale->setStartTime(new \DateTime(1000, new \DateTimeZone('UTC')));
+        $estivale->setEndTime(new \DateTime(1900, new \DateTimeZone('UTC')));
+        $estivale->addDay($lundi);
+        $estivale->addDay($mardi);
+        $estivale->addDay($mercredi);
+        $estivale->addDay($jeudi);
+        $estivale->addDay($vendredi);
+        $estivale->addDay($samedi);
+        $manager->persist($estivale);
 
-        $février = new Period();
-        $février->setMonth('Février');
-        $manager->persist($février);
-
-        $mars = new Period();
-        $mars->setMonth('Mars');
-        $manager->persist($mars);
-
-        $avril = new Period();
-        $avril->setMonth('Avril');
-        $manager->persist($avril);
-
-        $mai = new Period();
-        $mai->setMonth('mai');
-        $manager->persist($mai);
-
-        $juin = new Period();
-        $juin->setMonth('juin');
-        $manager->persist($juin);
-
-        $am8h = new Period();
-        $am8h->setHours('08h00');
-        $manager->persist($am8h);
-
-        $pm19h = new Period();
-        $pm19h->setHours('19h00');
-        $manager->persist($pm19h);
+        $hivernale = new Period();
+        $hivernale->setPeriodName('hivernale');
+        $hivernale->setStartDate(new \DateTime(2020-15-11, new \DateTimeZone('UTC')));
+        $hivernale->setEndDate(new \DateTime(2020-06-15, new \DateTimeZone('UTC')));
+        $hivernale->setStartTime(new \DateTime(1000, new \DateTimeZone('UTC')));
+        $hivernale->setEndTime(new \DateTime(1800, new \DateTimeZone('UTC')));
+        $hivernale->addDay($mardi);
+        $hivernale->addDay($mercredi);
+        $hivernale->addDay($jeudi);
+        $hivernale->addDay($vendredi);
+        $hivernale->addDay($samedi);
+        $manager->persist($hivernale);
 
         // Create users
         $laetitia = new User();
@@ -186,7 +183,7 @@ class AppFixtures extends Fixture
         $manager->persist($jardinRemarquable);
 
         $entreprisePatrimoineVivant = new Review();
-        $entreprisePatrimoineVivant->setReviewName('Entreprise du patrimoin vivant');
+        $entreprisePatrimoineVivant->setReviewName('Entreprise du patrimoine vivant');
         $manager->persist($entreprisePatrimoineVivant);
 
         // Create some Role of contact
@@ -217,7 +214,7 @@ class AppFixtures extends Fixture
 
         // Create some POIs
         $poi1 = new Poi;
-        $poi1->setPoiName('Musée international de la parfumerie');
+        $poi1->setPoiName('Yapluka park');
         $poi1->setDescription('En 2019, Yapluka Park fait sa mue ! Yapluka Park devient un parc de loisirs pour toute la famille, enfants, adultes, jeunes et moins jeunes avec une offre d’activités étoffée pour le plaisir du plus grand nombre.');
         $poi1->setAddress('2 Boulevard du Jeu de Ballon');
         $poi1->setpoiGpsLat('43.6667');
@@ -231,7 +228,7 @@ class AppFixtures extends Fixture
         $manager->persist($poi1);
 
         $poi2 = new Poi;
-        $poi2 -> setPoiName('Yapluka park');
+        $poi2 -> setPoiName('Musée international de la parfumerie');
         $poi2 -> setDescription('Créé en 1989, Le Musée International de la Parfumerie, musée unique au monde, s’inscrit sur le territoire emblématique de la ville de Grasse, berceau de la parfumerie de luxe dont la France a été l’initiatrice. Dédié à l’une des activités traditionnelles françaises les plus prestigieuses, le Musée International de la Parfumerie, établissement public, labellisé « Musée de France », permet aux visiteurs de découvrir l’histoire et l’originalité du métier des industriels et des grandes Maisons de parfumerie. Véritable témoignage de l’histoire internationale technique, esthétique, sociale et culturelle de la tradition de l’usage des senteurs, le musée aborde par une approche anthropologique l’histoire des fragrances sous tous ses aspects -matières premières, fabrication, industrie, innovation, négoce, design, usages et à travers des formes très diverses- objets d’art, arts décoratifs, textiles, témoins archéologiques, pièces uniques ou formes industrielles.');
         $poi2->setAddress('Chemin du petit mont');
         $poi2->setpoiGpsLat('45.5936');
@@ -247,7 +244,6 @@ class AppFixtures extends Fixture
         $grasse->setCityName('Grasse');
         $grasse->setCityGpsLat('43.6478075');
         $grasse->setCityGpsLng('6.9316481');
-        // $grasse->setDepartment(06);
         // $grasse->AddPoi($poi1);
         $manager->persist($grasse);
 
@@ -256,15 +252,13 @@ class AppFixtures extends Fixture
         $gourdon->setCityName('Gourdon');
         $gourdon->setCityGpsLat('43.724361988304');
         $gourdon->setCityGpsLng('6.9692666666667');
-        // $gourdon->setDepartment(06);
         $manager->persist($gourdon);
 
         $ruy = new City;
         $ruy->setCityCode('38300');
-        $ruy->setCityName('ruy montceau');
+        $ruy->setCityName('Ruy-Montceau');
         $ruy->setCityGpsLat('45.589835266272');
         $ruy->setCityGpsLng('5.3449137278106');
-        // $ruy->setDepartment('38');
         $ruy->AddPoi($poi2);
         $manager->persist($ruy);
 
@@ -273,10 +267,19 @@ class AppFixtures extends Fixture
         $stAndeol->setCityName('Saint-Andéol');
         $stAndeol->setCityGpsLat('44.951996707317');
         $stAndeol->setCityGpsLng('5.5494081707317');
-        // $stAndeol->setDepartment($isere);
         $manager->persist($stAndeol);
 
         // Create some departments
+        $alpesDeHauteProvence = new Department();
+        $alpesDeHauteProvence->setDepartmentName('Alpes-De-Haute-Provence');
+        $alpesDeHauteProvence->setDepartmentCode(04);
+        $manager->persist($alpesDeHauteProvence);
+
+        $hautesAlpes = new Department();
+        $hautesAlpes->setDepartmentName('Hautes-Alpes');
+        $hautesAlpes->setDepartmentCode(05);
+        $manager->persist($hautesAlpes);
+
         $alpesMaritimes = new Department();
         $alpesMaritimes->setDepartmentName('Alpes-Maritimes');
         $alpesMaritimes->setDepartmentCode(06);
@@ -284,8 +287,78 @@ class AppFixtures extends Fixture
         $alpesMaritimes->addCity($gourdon);
         $manager->persist($alpesMaritimes);
 
+        $bouchesDuRhone = new Department();
+        $bouchesDuRhone->setDepartmentName('Bouches-du-Rhône');
+        $bouchesDuRhone->setDepartmentCode(13);
+        $manager->persist($bouchesDuRhone);
+
+        $var = new Department();
+        $var->setDepartmentName('Var');
+        $var->setDepartmentCode(04);
+        $manager->persist($var);
+
+        $vaucluse = new Department();
+        $vaucluse->setDepartmentName('Vaucluse');
+        $vaucluse->setDepartmentCode(04);
+        $manager->persist($vaucluse);
+
+        $ain = new Department();
+        $ain->setDepartmentName('Ain');
+        $ain->setDepartmentCode(01);
+        $manager->persist($ain);
+
+        $allier = new Department();
+        $allier->setDepartmentName('Allier');
+        $allier->setDepartmentCode(03);
+        $manager->persist($allier);
+
+        $ardeche = new Department();
+        $ardeche->setDepartmentName('Ardèche');
+        $ardeche->setDepartmentCode(07);
+        $manager->persist($ardeche);
+
+        $cantal = new Department();
+        $cantal->setDepartmentName('Cantal');
+        $cantal->setDepartmentCode(15);
+        $manager->persist($cantal);
+
+        $drome = new Department();
+        $drome->setDepartmentName('Drôme');
+        $drome->setDepartmentCode(26);
+        $manager->persist($drome);
+        
+        $loire = new Department();
+        $loire->setDepartmentName('Loire');
+        $loire->setDepartmentCode(42);
+        $manager->persist($loire);
+
+        $hauteLoire = new Department();
+        $hauteLoire->setDepartmentName('Haute-Loire');
+        $hauteLoire->setDepartmentCode(43);
+        $manager->persist($hauteLoire);
+
+        $puyDeDome = new Department();
+        $puyDeDome->setDepartmentName('Puy-De-Dome');
+        $puyDeDome->setDepartmentCode(63);
+        $manager->persist($puyDeDome);
+
+        $rhone = new Department();
+        $rhone->setDepartmentName('Rhône');
+        $rhone->setDepartmentCode(69);
+        $manager->persist($rhone);
+
+        $savoie = new Department();
+        $savoie->setDepartmentName('Savoie');
+        $savoie->setDepartmentCode(73);
+        $manager->persist($savoie);
+
+        $hauteSavoie = new Department();
+        $hauteSavoie->setDepartmentName('Haute-Savoie');
+        $hauteSavoie->setDepartmentCode(74);
+        $manager->persist($hauteSavoie);
+        
         $isere = new Department();
-        $isere->setDepartmentName('isere');
+        $isere->setDepartmentName('Isère');
         $isere->setDepartmentCode(38);
         $isere->addCity($ruy);
         $isere->addCity($stAndeol);
@@ -295,11 +368,22 @@ class AppFixtures extends Fixture
         $auvergneRhoneAlpes = new Area();
         $auvergneRhoneAlpes->setAreaCode(84);
         $auvergneRhoneAlpes->setAreaName('Auvergne-Rhône-Alpes');
+        $auvergneRhoneAlpes->addDepartment($ain);
+        $auvergneRhoneAlpes->addDepartment($allier);
+        $auvergneRhoneAlpes->addDepartment($ardeche);
+        $auvergneRhoneAlpes->addDepartment($cantal);
+        $auvergneRhoneAlpes->addDepartment($drome);
         $auvergneRhoneAlpes->addDepartment($isere);
+        $auvergneRhoneAlpes->addDepartment($loire);
+        $auvergneRhoneAlpes->addDepartment($hauteLoire);
+        $auvergneRhoneAlpes->addDepartment($puyDeDome);
+        $auvergneRhoneAlpes->addDepartment($rhone);
+        $auvergneRhoneAlpes->addDepartment($savoie);
+        $auvergneRhoneAlpes->addDepartment($hauteSavoie);
         $manager->persist($auvergneRhoneAlpes);
 
         $bourgogneFrancheComte = new Area();
-        $bourgogneFrancheComte->setAreaCode('27');
+        $bourgogneFrancheComte->setAreaCode(27);
         $bourgogneFrancheComte->setAreaName('Bourgogne-Franche-Comté');
         $manager->persist($bourgogneFrancheComte);
 
@@ -371,7 +455,12 @@ class AppFixtures extends Fixture
         $paca = new Area();
         $paca->setAreaCode(93);
         $paca->setAreaName('Provence-Alpes-Côte d\'Azur');
+        $paca->addDepartment($alpesDeHauteProvence);
+        $paca->addDepartment($hautesAlpes);
         $paca->addDepartment($alpesMaritimes);
+        $paca->addDepartment($bouchesDuRhone);
+        $paca->addDepartment($var);
+        $paca->addDepartment($vaucluse);
         $manager->persist($paca);
 
         $reunion = new Area();
@@ -393,8 +482,24 @@ class AppFixtures extends Fixture
         $france = new Country;
         $france->setCountryName('France');
         $france->setCountryCode('FR');
-        $france->addArea($paca);
         $france->addArea($auvergneRhoneAlpes);
+        $france->addArea($bourgogneFrancheComte);
+        $france->addArea($bretagne);
+        $france->addArea($centreValDeLoire);
+        $france->addArea($corse);
+        $france->addArea($grandEst);
+        $france->addArea($hautsDeFrance);
+        $france->addArea($ileDeFrance);
+        $france->addArea($normandie);
+        $france->addArea($nouvelleAquitaine);
+        $france->addArea($occitanie);
+        $france->addArea($guadeloupe);
+        $france->addArea($martinique);
+        $france->addArea($guyane);
+        $france->addArea($paca);
+        $france->addArea($reunion);
+        $france->addArea($mayotte);
+        $france->addArea($COM);
         $manager->persist($france);
 
         $belgique = new Country;
@@ -406,34 +511,25 @@ class AppFixtures extends Fixture
         $visite = new Offer;
         $visite->setDescription('Visite du musée du parfum');
         $visite->setPoi($poi1);
-        $visite->addPeriod($lundi);
-        $visite->addPeriod($mardi);
-        $visite->addPeriod($mercredi);
-        $visite->addPeriod($jeudi);
-        $visite->addPeriod($vendredi);
+        $visite->addPeriod($estivale);
+        $visite->addPeriod($hivernale);
         $manager->persist($visite);
 
         $participation = new Offer;
         $participation->setDescription('Initiation à la création d\'un parfum');
         $participation->setPoi($poi1);
-        $participation->addPeriod($samedi);
+        $visite->addPeriod($estivale);
+        $visite->addPeriod($hivernale);
         $manager->persist($participation);
 
         $parcours = new Offer();
         $parcours->setDescription('6 parcours enfants');
         $parcours->setPoi($poi2);
-        $parcours->addPeriod($lundi);
-        $parcours->addPeriod($mardi);
-        $parcours->addPeriod($mercredi);
-        $parcours->addPeriod($jeudi);
-        $parcours->addPeriod($vendredi);
-        $parcours->addPeriod($samedi);
-        $parcours->addPeriod($dimanche);
         $manager->persist($parcours);
 
         // Create some comments
         $commentPoi1Laetitia = new Comment();
-        $commentPoi1Laetitia->setContent('Découvertes de pleins de senteurs. Pas mal.');
+        $commentPoi1Laetitia->setContent('Découvertes de plein de senteurs. Pas mal.');
         $commentPoi1Laetitia->setPicture('assets/images/Cracovie_Nov2007 021.1.jpg');
         $commentPoi1Laetitia->setRate(3);
         $commentPoi1Laetitia->setPoi($poi1);
@@ -485,9 +581,6 @@ class AppFixtures extends Fixture
         $participationAdultePleinTarif->setAudience($adulte);
         $manager->persist($participationAdultePleinTarif);
 
-
-
-        
         $manager->flush();
     }
 }
