@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Poi;
+use App\Form\HomeType;
+use App\Repository\PoiRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,19 +14,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function index()
+    public function list(PoiRepository $poiRepository): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        $form = $this->createForm(HomeType::class);
+        return $this->render('home/list.html.twig', [
+            'form' => $form->createView(),
         ]);
 
-//         return new \Symfony\Component\HttpFoundation\Response(<<<EOF
-// <html>
-//     <body>
-//         <img src="/images/under-construction.gif" />
-//     </body>
-// </html>
-// EOF
-//         );
     }
 }

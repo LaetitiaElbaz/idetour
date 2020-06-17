@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poi Liste{% endblock %}
+
+{% block body %}
+    <h1>Liste des Poi</h1>
+
+    {{ include('home/_form.html.twig') }}
+
+
+    {# <select class="custom-select">
+    
+        <option selected>Choisissez une région</option> #}
+            {# {% for poi in pois %}
+
+                <tr>
+                    <td>{{ poi.areaName}}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %} #}
+    {# </select> #}
+
+    {# <select class="custom-select">
+        <option selected>Choisissez un département</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du POI</th>
+                <th>Description</th>
+                <th>Addresse</th>
+                <th>Ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poi in pois %}
+         {{ dump(pois) }}
+            <tr>
+                <td>{{ poi.poiName }}</td>
+                <td>{{ poi.description }}</td>
+                <td>{{ poi.address }}</td>
+                <td>{{ poi.city }}</td>
+                <td>
+                    <a href="#">Laisser un commentaire</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+{% endblock %}
