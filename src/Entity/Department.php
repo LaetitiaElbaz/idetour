@@ -60,6 +60,11 @@ class Department
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->departmentName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

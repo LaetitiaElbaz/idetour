@@ -50,7 +50,7 @@ class Area
     private $country;
 
     /**
-     * @ORM\OneToMany(targetEntity=department::class, mappedBy="area")
+     * @ORM\OneToMany(targetEntity=Department::class, mappedBy="area")
      */
     private $departments;
 
@@ -58,6 +58,11 @@ class Area
     {
         $this->departments = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->areaName;
     }
 
     public function getId(): ?int
@@ -145,7 +150,7 @@ class Area
         return $this->departments;
     }
 
-    public function addDepartment(department $department): self
+    public function addDepartment(Department $department): self
     {
         if (!$this->departments->contains($department)) {
             $this->departments[] = $department;
@@ -155,7 +160,7 @@ class Area
         return $this;
     }
 
-    public function removeDepartment(department $department): self
+    public function removeDepartment(Department $department): self
     {
         if ($this->departments->contains($department)) {
             $this->departments->removeElement($department);
