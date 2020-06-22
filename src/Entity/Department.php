@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,11 +45,12 @@ class Department
 
     /**
      * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="departments")
+     * @ORM\JoinColumn(name="area_id", referencedColumnName="id")
      */
     private $area;
 
     /**
-     * @ORM\OneToMany(targetEntity=city::class, mappedBy="department")
+     * @ORM\OneToMany(targetEntity=City::class, mappedBy="department")
      */
     private $cities;
 
@@ -63,6 +63,7 @@ class Department
     public function __toString()
     {
         return $this->departmentName;
+        return $this->cities;
     }
 
     public function getId(): ?int
@@ -143,14 +144,14 @@ class Department
     }
 
     /**
-     * @return Collection|city[]
+     * @return Collection|City[]
      */
     public function getCities(): Collection
     {
         return $this->cities;
     }
 
-    public function addCity(city $city): self
+    public function addCity(City $city): self
     {
         if (!$this->cities->contains($city)) {
             $this->cities[] = $city;
@@ -160,7 +161,7 @@ class Department
         return $this;
     }
 
-    public function removeCity(city $city): self
+    public function removeCity(City $city): self
     {
         if ($this->cities->contains($city)) {
             $this->cities->removeElement($city);

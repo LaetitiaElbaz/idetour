@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,7 +59,7 @@ class City
     private $department;
 
     /**
-     * @ORM\OneToMany(targetEntity=poi::class, mappedBy="city")
+     * @ORM\OneToMany(targetEntity=Poi::class, mappedBy="city")
      */
     private $pois;
 
@@ -177,14 +176,14 @@ class City
     }
 
     /**
-     * @return Collection|poi[]
+     * @return Collection|Poi[]
      */
     public function getPois(): Collection
     {
         return $this->pois;
     }
 
-    public function addPoi(poi $poi): self
+    public function addPoi(Poi $poi): self
     {
         if (!$this->pois->contains($poi)) {
             $this->pois[] = $poi;
@@ -194,7 +193,7 @@ class City
         return $this;
     }
 
-    public function removePoi(poi $poi): self
+    public function removePoi(Poi $poi): self
     {
         if ($this->pois->contains($poi)) {
             $this->pois->removeElement($poi);

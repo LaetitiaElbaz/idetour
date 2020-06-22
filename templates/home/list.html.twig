@@ -5,49 +5,36 @@
 {% block body %}
     <h1>Liste des Poi</h1>
 
-    {{ include('home/_form.html.twig') }}
+    {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <p>
+                <button class="btn btn-primary">{{ button_label|default('Voir la liste') }}</button>
+            </p>
 
 
-    {# <select class="custom-select">
-    
-        <option selected>Choisissez une région</option> #}
-            {# {% for poi in pois %}
 
-                <tr>
-                    <td>{{ poi.areaName}}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="10">no records found</td>
-                </tr>
-            {% endfor %} #}
-    {# </select> #}
-
-    {# <select class="custom-select">
-        <option selected>Choisissez un département</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-
-    <table class="table">
+     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nom du POI</th>
+                <th>PoiName</th>
                 <th>Description</th>
-                <th>Addresse</th>
+                <th>Address</th>
+                <th>Code postal</th>
                 <th>Ville</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for poi in pois %}
-         {{ dump(pois) }}
+         {# {{ dump(pois) }} #}
             <tr>
                 <td>{{ poi.poiName }}</td>
                 <td>{{ poi.description }}</td>
                 <td>{{ poi.address }}</td>
-                <td>{{ poi.city }}</td>
+                <td>{{ poi.city.cityCode }}</td>
+                <td>{{ poi.city.cityName }}</td>
                 <td>
                     <a href="#">Laisser un commentaire</a>
                 </td>
@@ -58,5 +45,14 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table> #}
+    </table>
+
+
+    {{ form_end(form) }}
+
+
+
+
+
+
 {% endblock %}
