@@ -45,6 +45,11 @@ class Review
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->reviewName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

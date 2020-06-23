@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poi{% endblock %}
+
+{% block body %}
+    <h1>Poi</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ poi.id }}</td>
+            </tr>
+            <tr>
+                <th>PoiName</th>
+                <td>{{ poi.poiName }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ poi.description }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ poi.address }}</td>
+            </tr>
+            <tr>
+                <th>PoiGpsLat</th>
+                <td>{{ poi.poiGpsLat }}</td>
+            </tr>
+            <tr>
+                <th>PoiGpsLng</th>
+                <td>{{ poi.poiGpsLng }}</td>
+            </tr>
+            <tr>
+                <th>PoiSlug</th>
+                <td>{{ poi.poiSlug }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ poi.createdAt ? poi.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ poi.updatedAt ? poi.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('poi_list') }}">back to list</a>
+
+    <a href="{{ path('poi_edit', {'id': poi.id}) }}">edit</a>
+
+    {{ include('poi/_delete_form.html.twig') }}
+{% endblock %}

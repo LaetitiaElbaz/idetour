@@ -33,12 +33,12 @@ class Price
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=offer::class, inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity=Offer::class, inversedBy="prices")
      */
     private $offer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=audience::class, inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity=Audience::class, inversedBy="prices")
      */
     private $audience;
 
@@ -100,12 +100,12 @@ class Price
         return $this;
     }
 
-    public function getAudience(): ?audience
+    public function getAudience(): ?Audience
     {
         return $this->audience;
     }
 
-    public function setAudience(?audience $audience): self
+    public function setAudience(?Audience $audience): self
     {
         $this->audience = $audience;
 

@@ -35,7 +35,7 @@ class Category
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=poi::class, inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Poi::class, inversedBy="categories")
      */
     private $pois;
 
@@ -43,6 +43,11 @@ class Category
     {
         $this->pois = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->categoryName;
     }
 
     public function getId(): ?int
@@ -87,14 +92,14 @@ class Category
     }
 
     /**
-     * @return Collection|poi[]
+     * @return Collection|Poi[]
      */
     public function getPois(): Collection
     {
         return $this->pois;
     }
 
-    public function addPoi(poi $poi): self
+    public function addPoi(Poi $poi): self
     {
         if (!$this->pois->contains($poi)) {
             $this->pois[] = $poi;
@@ -103,7 +108,7 @@ class Category
         return $this;
     }
 
-    public function removePoi(poi $poi): self
+    public function removePoi(Poi $poi): self
     {
         if ($this->pois->contains($poi)) {
             $this->pois->removeElement($poi);

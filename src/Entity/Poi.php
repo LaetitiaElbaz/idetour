@@ -80,17 +80,17 @@ class Poi
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=offer::class, mappedBy="poi")
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="poi")
      */
     private $offers;
 
     /**
-     * @ORM\OneToMany(targetEntity=comment::class, mappedBy="poi")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="poi")
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=contact::class, mappedBy="poi")
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="poi")
      */
     private $contacts;
 
@@ -290,6 +290,37 @@ class Poi
         return $this;
     }
 
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setPoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getPoi() === $this) {
+                $offer->setPoi(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getCity(): ?City
     {
         return $this->city;
@@ -303,45 +334,14 @@ class Poi
     }
 
     /**
-     * @return Collection|offer[]
-     */
-    public function getOffers(): Collection
-    {
-        return $this->offers;
-    }
-
-    public function addOffer(offer $offer): self
-    {
-        if (!$this->offers->contains($offer)) {
-            $this->offers[] = $offer;
-            $offer->setPoi($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOffer(offer $offer): self
-    {
-        if ($this->offers->contains($offer)) {
-            $this->offers->removeElement($offer);
-            // set the owning side to null (unless already changed)
-            if ($offer->getPoi() === $this) {
-                $offer->setPoi(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|comment[]
+     * @return Collection|Comment[]
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function addComment(comment $comment): self
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -351,7 +351,7 @@ class Poi
         return $this;
     }
 
-    public function removeComment(comment $comment): self
+    public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
@@ -365,14 +365,14 @@ class Poi
     }
 
     /**
-     * @return Collection|contact[]
+     * @return Collection|Contact[]
      */
     public function getContacts(): Collection
     {
         return $this->contacts;
     }
 
-    public function addContact(contact $contact): self
+    public function addContact(Contact $contact): self
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts[] = $contact;
@@ -382,7 +382,7 @@ class Poi
         return $this;
     }
 
-    public function removeContact(contact $contact): self
+    public function removeContact(Contact $contact): self
     {
         if ($this->contacts->contains($contact)) {
             $this->contacts->removeElement($contact);
