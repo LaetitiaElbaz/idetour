@@ -3,56 +3,66 @@
 {% block title %}Poi Liste{% endblock %}
 
 {% block body %}
-    <h1>Liste des Poi</h1>
+    <h1>Bienvenue sur IDtour</h1>
+        
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            A quoi sert ce site?
+        </a>
 
-    {{ form_start(form) }}
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            Il s'agit d'un site collaboratif qui vise à ce que chacun d'entre nous fasse partager ses bons plans tourisques, qu'ils soient atypiques, familiaux, sportifs...et que sais-je encore?!
+        </div>
+    </div>
 
-            {{ form_widget(form) }}
+    <h2>Recherchez vos centres d'intérêt</h2>
+    <div class="container">
+        <div class="row">
+            <div class="input-group mb-3">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <p>
+                    <button class="btn btn-primary">{{ button_label|default('Voir la liste') }}</button>
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div> 
 
-            <p>
-                <button class="btn btn-primary">{{ button_label|default('Voir la liste') }}</button>
-            </p>
-
-
-
-     <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>PoiName</th>
-                <th>Description</th>
-                <th>Address</th>
-                <th>Code postal</th>
-                <th>Ville</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for poi in pois %}
-         {# {{ dump(pois) }} #}
-            <tr>
-                <td>{{ poi.poiName }}</td>
-                <td>{{ poi.description }}</td>
-                <td>{{ poi.address }}</td>
-                <td>{{ poi.city.cityCode }}</td>
-                <td>{{ poi.city.cityName }}</td>
-                <td>
-                    <a href="#">Laisser un commentaire</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-
-    {{ form_end(form) }}
-
-
-
-
-
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>PoiName</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Code postal</th>
+                        <th>Ville</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for poi in pois %}
+                        {# {{ dump(pois) }} #}
+                        <tr>
+                            <td>{{ poi.poiName }}</td>
+                            <td>{{ poi.description }}</td>
+                            <td>{{ poi.address }}</td>
+                            <td>{{ poi.city.cityCode }}</td>
+                            <td>{{ poi.city.cityName }}</td>
+                            <td>
+                                <a href="#">Laisser un commentaire</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">no records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 {% endblock %}
