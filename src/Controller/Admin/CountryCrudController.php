@@ -33,14 +33,14 @@ class CountryCrudController extends AbstractCrudController
 
             // the names of the Doctrine entity properties where the search is made on
             // (by default it looks for in all properties)
-            ->setSearchFields(['id','countryCode', 'CountryName', 'createdAt','updatedAt'])
+            ->setSearchFields(['countryCode', 'CountryName', 'createdAt','updatedAt'])
 
             // defines the initial sorting applied to the list of entities
             // (user can later change this sorting by clicking on the table columns)
-            ->setDefaultSort(['id' => 'DESC', 'countryName' => 'ASC'])
+            ->setDefaultSort(['countryName' => 'ASC'])
 
             // the max number of entities to display per page
-            ->setPaginatorPageSize(10)
+            ->setPaginatorPageSize(20)
 
         ;
     }
@@ -49,7 +49,7 @@ class CountryCrudController extends AbstractCrudController
     {
 
         return [
-            IdField::new('id')->hideOnForm(),
+            IdField::new('id')->hideOnIndex()->hideOnForm(),
             TextField::new('countryCode', 'Code pays'),
             TextField::new('countryName', 'Nom du pays'),
             DateTimeField::new('createdAt')->onlyOnDetail(),
