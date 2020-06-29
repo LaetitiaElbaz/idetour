@@ -33,11 +33,11 @@ class AreaCrudController extends AbstractCrudController
 
             // the names of the Doctrine entity properties where the search is made on
             // (by default it looks for in all properties)
-            ->setSearchFields(['id', 'areaCode', 'areaName', 'createdAt', 'updatedAt'])
+            ->setSearchFields(['areaCode', 'areaName', 'createdAt', 'updatedAt'])
 
             // defines the initial sorting applied to the list of entities
             // (user can later change this sorting by clicking on the table columns)
-            ->setDefaultSort(['id' => 'DESC', 'areaName' => 'ASC'])
+            ->setDefaultSort(['areaName' => 'ASC'])
 
             // the max number of entities to display per page
             ->setPaginatorPageSize(10);
@@ -47,7 +47,7 @@ class AreaCrudController extends AbstractCrudController
     {
 
         return [
-            IdField::new('id')->hideOnForm(),
+            IdField::new('id')->hideOnIndex()->hideOnForm(),
             TextField::new('areaCode', 'Code régions'),
             TextField::new('areaName', 'Nom de la régions'),
             DateTimeField::new('createdAt')->onlyOnDetail(),
