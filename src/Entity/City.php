@@ -73,6 +73,7 @@ class City
     public function __toString()
     {
         return $this->cityName;
+        return $this->department;
     }
 
     public function getId(): ?int
