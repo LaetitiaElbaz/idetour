@@ -1,39 +1,23 @@
+# config/packages/easy_admin.yaml
 easy_admin:
     site_name: 'IDtour'
     design:
         brand_color: '#6b1710'
     entities:
-        Région: 
-            class: App\Entity\Area
-        Public: 
-            class: App\Entity\Audience
-        Catégorie: 
-            class: App\Entity\Category
-        Ville: 
-            class: App\Entity\City
-        Commentaires: 
-            class: App\Entity\Comment
-        Contact: 
-            class: App\Entity\Contact
-        Pays: 
-            class: App\Entity\Country
-        Jours: 
-            class: App\Entity\Days
-        Département: 
-            class: App\Entity\Department
-        Offre: 
-            class: App\Entity\Offre
-        Période: 
-            class: App\Entity\Period
-        Poi: 
-            class: App\Entity\Poi
-        Prix: 
-            class: App\Entity\Prix
-        Label: 
-            class: App\Entity\Review
-        Rôle: 
-            class: App\Entity\Role
-        Etiquette: 
-            class: App\Entity\Tag
-        Utilisateur: 
-            class: App\Entity\User
+        - App\Entity\Area
+        - App\Entity\Audience
+        - App\Entity\Category
+        - App\Entity\City
+        - App\Entity\Comment
+        - App\Entity\Contact
+        - App\Entity\Country
+        - App\Entity\Days
+        - App\Entity\Department
+        - App\Entity\Offre
+        - App\Entity\Period
+        - App\Entity\Poi
+        - App\Entity\Prix
+        - App\Entity\Review
+        - App\Entity\Role
+        - App\Entity\Tag
+        - App\Entity\User
