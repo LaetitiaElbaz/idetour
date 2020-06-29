@@ -48,8 +48,8 @@ class AreaCrudController extends AbstractCrudController
 
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('areaCode', 'Code pays'),
-            TextField::new('areaName', 'Nom du pays'),
+            TextField::new('areaCode', 'Code régions'),
+            TextField::new('areaName', 'Nom de la régions'),
             DateTimeField::new('createdAt')->onlyOnDetail(),
             DateTimeField::new('updatedAt')->onlyOnDetail(),
             TextField::new('areaSlug')->onlyOnDetail(),
