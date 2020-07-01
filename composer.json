@@ -31,6 +31,7 @@
         "symfony/web-link": "5.1.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.1.*",
+        "twbs/bootstrap": "^4.5",
         "vich/uploader-bundle": "^1.14"
     },
     "require-dev": {
