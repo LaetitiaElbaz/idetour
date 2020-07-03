@@ -19,6 +19,8 @@ use App\Entity\Review;
 use App\Entity\Role;
 use App\Entity\Tag;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -106,5 +108,39 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out'),
             ]);
     }
+
+    public function configureCrud(): Crud
+    {
+        return Crud::new()
+            // the first argument is the "template name", which is the same as the
+            // Twig path but without the `@EasyAdmin/` prefix
+
+            ->overrideTemplates([
+                'layout' => 'bundles/easyAdminBundle/default/layout.html.twig',
+                // 'crud/field/textarea' => 'admin/fields/dynamic_textarea.html.twig',
+            ])
+        ;
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+
+        // My custom CSS
+        ->addCssFile('assets/css/admin.css')
+        // HEAD : Bootstrap CSS CDN
+        ->addHtmlContentToHead('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">')
+        // HEAD : Font Awesome JS
+        ->addHtmlContentToHead('<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">')
+        ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>')
+        ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>')
+        
+        // BODY : JQuery.js
+        ->addHtmlContentToBody('<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>')
+        // BODY : POppers.js
+        ->addHtmlContentToBody('<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>');
+        
+    }
+
 
 }
