@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -72,6 +73,7 @@ class City
     public function __toString()
     {
         return $this->cityName;
+        return $this->department;
     }
 
     public function getId(): ?int

@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\PoiRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PoiRepository::class)
+ * @Vich\Uploadable()
  */
 class Poi
 {
@@ -94,6 +95,16 @@ class Poi
      */
     private $contacts;
 
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="post_thumbnails", fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -103,6 +114,7 @@ class Poi
         $this->comments = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -393,5 +405,38 @@ class Poi
         }
 
         return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * @param mixed $thumbnailFile
+     * @throws \Exception
+     */
+    public function setThumbnailFile($thumbnailFile): void
+    {
+        $this->thumbnailFile = $thumbnailFile;
+        //If thumbnailFile exists, we update the updatedAt field : if we don't update any field, Doctrine is not listening because thumbnailFile is not map to Doctrine.
+        if ($thumbnailFile) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 }

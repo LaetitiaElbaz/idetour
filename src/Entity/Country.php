@@ -45,7 +45,7 @@ class Country
     private $countrySlug;
 
     /**
-     * @ORM\OneToMany(targetEntity=area::class, mappedBy="country")
+     * @ORM\OneToMany(targetEntity=Area::class, mappedBy="country")
      */
     private $areas;
 
@@ -122,14 +122,14 @@ class Country
     }
 
     /**
-     * @return Collection|area[]
+     * @return Collection|Area[]
      */
     public function getAreas(): Collection
     {
         return $this->areas;
     }
 
-    public function addArea(area $area): self
+    public function addArea(Area $area): self
     {
         if (!$this->areas->contains($area)) {
             $this->areas[] = $area;
@@ -139,7 +139,7 @@ class Country
         return $this;
     }
 
-    public function removeArea(area $area): self
+    public function removeArea(Area $area): self
     {
         if ($this->areas->contains($area)) {
             $this->areas->removeElement($area);

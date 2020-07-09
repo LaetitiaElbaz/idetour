@@ -1,3 +1,7 @@
+# config/routes.yaml
+dashboard:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index

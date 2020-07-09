@@ -1,0 +1,23 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+    site_name: 'IDtour'
+    design:
+        brand_color: '#6b1710'
+    entities:
+        - App\Entity\Area
+        - App\Entity\Audience
+        - App\Entity\Category
+        - App\Entity\City
+        - App\Entity\Comment
+        - App\Entity\Contact
+        - App\Entity\Country
+        - App\Entity\Days
+        - App\Entity\Department
+        - App\Entity\Offre
+        - App\Entity\Period
+        - App\Entity\Poi
+        - App\Entity\Prix
+        - App\Entity\Review
+        - App\Entity\Role
+        - App\Entity\Tag
+        - App\Entity\User

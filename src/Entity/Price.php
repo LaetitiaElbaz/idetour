@@ -88,12 +88,12 @@ class Price
         return $this;
     }
 
-    public function getOffer(): ?offer
+    public function getOffer(): ?Offer
     {
         return $this->offer;
     }
 
-    public function setOffer(?offer $offer): self
+    public function setOffer(?Offer $offer): self
     {
         $this->offer = $offer;
 

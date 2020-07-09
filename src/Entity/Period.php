@@ -55,7 +55,7 @@ class Period
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=offer::class, inversedBy="periods")
+     * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="periods")
      */
     private $offers;
 
@@ -161,14 +161,14 @@ class Period
     }
 
     /**
-     * @return Collection|offer[]
+     * @return Collection|Offer[]
      */
     public function getOffers(): Collection
     {
         return $this->offers;
     }
 
-    public function addOffer(offer $offer): self
+    public function addOffer(Offer $offer): self
     {
         if (!$this->offers->contains($offer)) {
             $this->offers[] = $offer;
@@ -177,7 +177,7 @@ class Period
         return $this;
     }
 
-    public function removeOffer(offer $offer): self
+    public function removeOffer(Offer $offer): self
     {
         if ($this->offers->contains($offer)) {
             $this->offers->removeElement($offer);
