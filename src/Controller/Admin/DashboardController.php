@@ -53,36 +53,40 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Centres d\'intérêt'),
             MenuItem::linkToCrud('Centres d\'intérêt', 'fa fa-map-marker', Poi::class)
-            ->setController(Offer::class)
+                ->setController(Offer::class)
                 ->setController(PriceCrudController::class)
                 ->setController(ContactCrudController::class)
                 ->setController(RoleCrudController::class)
                 ->setQueryParameter('sortField', 'poiName'),
 
-
-            MenuItem::section('Localisation'),
-            MenuItem::linkToCrud('Pays', 'fa fa-globe', Country::class),
-                // ->setAction('new'),
-            MenuItem::linkToCrud('Régions', 'fa fa-globe', Area::class),
-            MenuItem::linkToCrud('Départements', 'fa fa-globe', Department::class),
-            MenuItem::linkToCrud('Villes', 'fa fa-globe', City::class),
-
-            MenuItem::section('Public'),
+            MenuItem::section('COMPOSANTS'),
+            MenuItem::subMenu('Localisation', 'fa fa-globe')->setSubItems([
+                MenuItem::linkToCrud('Pays', '', Country::class),
+                MenuItem::linkToCrud('Régions', '', Area::class),
+                MenuItem::linkToCrud('Départements', '', Department::class),
+                MenuItem::linkToCrud('Villes', '', City::class),
+            ]),
+            
             MenuItem::linkToCrud('Public', 'fa fa-users', Audience::class),
 
-            MenuItem::section('Catégories'),
-            MenuItem::linkToCrud('Catégories', 'fa fa-tags', Category::class),
-            MenuItem::linkToCrud('Labels', 'fa fa-tags', Review::class),
-            MenuItem::linkToCrud('Etiquettes', 'fa fa-tags', Tag::class),
+            MenuItem::subMenu('Catégories', 'fa fa-calendar')->setSubItems([
+                MenuItem::linkToCrud('Catégories', '', Category::class),
+                MenuItem::linkToCrud('Labels', '', Review::class),
+                MenuItem::linkToCrud('Etiquettes', '', Tag::class),
+                ]),
+            
+            MenuItem::subMenu('Périodes', 'fa fa-tags')->setSubItems([
+                MenuItem::linkToCrud('Périodes', '', Period::class),
+                MenuItem::linkToCrud('Jours', '', Days::class),
+            ]),
 
             MenuItem::section('Utilisateurs'),
-            MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class),
-            MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class),
-            MenuItem::linkToExitImpersonation('Arrêtez l\'emprunt d\'identité', 'fa fa-sign-out'),
-
-            MenuItem::section('Périodes'),
-            MenuItem::linkToCrud('Périodes', 'fa fa-calendar', Period::class),
-            MenuItem::linkToCrud('Jours', 'fa fa-calendar', Days::class),
+            MenuItem::subMenu('Utilisateurs', 'fa fa-users')->setSubItems([
+                MenuItem::linkToCrud('Utilisateurs', '', User::class),
+                MenuItem::linkToCrud('Commentaires', '', Comment::class),
+                MenuItem::linkToExitImpersonation('Arrêtez l\'emprunt d\'identité', ''),
+            ]),
+    
         ];
 
     }
@@ -117,7 +121,8 @@ class DashboardController extends AbstractDashboardController
 
             ->overrideTemplates([
                 'layout' => 'bundles/easyAdminBundle/default/layout.html.twig',
-                // 'crud/field/textarea' => 'admin/fields/dynamic_textarea.html.twig',
+                'main_menu' => 'bundles/easyAdminBundle/default/menu.html.twig',
+
             ])
         ;
     }
@@ -127,7 +132,12 @@ class DashboardController extends AbstractDashboardController
         return Assets::new()
 
         // My custom CSS
-        ->addCssFile('assets/css/admin.css')
+        ->addCssFile('assets/css/adminLayout.css')
+        ->addCssFile('assets/css/adminMenu.css')
+        ->addCssFile('assets/css/adminVariables.css')
+
+
+
         // HEAD : Bootstrap CSS CDN
         ->addHtmlContentToHead('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">')
         // HEAD : Font Awesome JS

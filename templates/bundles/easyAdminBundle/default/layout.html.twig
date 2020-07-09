@@ -160,14 +160,13 @@ localStorage.getItem('ea/sidebar/width') || 'normal'
 							{% endblock header %}
 						</header>
 
-						<aside class="main-sidebar">
+						<aside class="left-sidebar">
 							{% block sidebar %}
-								<section class="sidebar">
+								<div class="scroll-sidebar ps-container ps-theme-default ps-active-y">
 									{% block main_menu_wrapper %}
 										{{ include(ea.templatePath('main_menu')) }}
 									{% endblock main_menu_wrapper %}
-								</section>
-
+								</div>
 							{% endblock sidebar %}
 						</aside>
 
