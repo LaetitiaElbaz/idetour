@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5bd17df4d87e14ae3692fae42081f8d1",
+    "content-hash": "199886b0e14ff34d5c0e3765ad3708c8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6364,16 +6364,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.5.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "7a6da5e3e7ad7c749dde806546a35d4d4259d965"
+                "reference": "8a628b943cf31ca0a002c08af661a95772480225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/7a6da5e3e7ad7c749dde806546a35d4d4259d965",
-                "reference": "7a6da5e3e7ad7c749dde806546a35d4d4259d965",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/8a628b943cf31ca0a002c08af661a95772480225",
+                "reference": "8a628b943cf31ca0a002c08af661a95772480225",
                 "shasum": ""
             },
             "replace": {
@@ -6391,16 +6391,16 @@
             ],
             "authors": [
                 {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                },
-                {
                     "name": "Jacob Thornton",
                     "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
                 }
             ],
             "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "https://getbootstrap.com/",
+            "homepage": "https://getbootstrap.com",
             "keywords": [
                 "JS",
                 "css",
@@ -6411,7 +6411,7 @@
                 "sass",
                 "web"
             ],
-            "time": "2020-05-12T17:44:42+00:00"
+            "time": "2018-01-18T18:29:48+00:00"
         },
         {
             "name": "twig/extra-bundle",

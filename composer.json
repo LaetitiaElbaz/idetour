@@ -30,7 +30,7 @@
         "symfony/validator": "5.1.*",
         "symfony/web-link": "5.1.*",
         "symfony/yaml": "5.1.*",
-        "twbs/bootstrap": "^4.5",
+        "twbs/bootstrap": "4.0.0",
         "vich/uploader-bundle": "^1.14"
     },
     "require-dev": {
