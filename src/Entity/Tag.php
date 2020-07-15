@@ -35,7 +35,7 @@ class Tag
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=poi::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Poi::class, inversedBy="tags")
      */
     private $pois;
 
@@ -92,14 +92,14 @@ class Tag
     }
 
     /**
-     * @return Collection|poi[]
+     * @return Collection|Poi[]
      */
     public function getPois(): Collection
     {
         return $this->pois;
     }
 
-    public function addPoi(poi $poi): self
+    public function addPoi(Poi $poi): self
     {
         if (!$this->pois->contains($poi)) {
             $this->pois[] = $poi;
@@ -108,7 +108,7 @@ class Tag
         return $this;
     }
 
-    public function removePoi(poi $poi): self
+    public function removePoi(Poi $poi): self
     {
         if ($this->pois->contains($poi)) {
             $this->pois->removeElement($poi);
