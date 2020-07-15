@@ -1,11 +1,11 @@
 {# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
 {% macro render_menu_item(item) %}
     {% if item.isMenuSection %}
-        {% if item.icon is not empty %}<i class="menu-icon fa-fw {{ item.icon }}"></i>{% endif %}
+        {% if item.icon is not empty %}<i class="menu-icon fa-fw {{ item.icon }} fa-lg"></i>{% endif %}
         <span class="{{ item.cssClass }}">{{ item.label }}</span>
     {% else %}
         <a href="{{ item.linkUrl }}" class="{{ item.cssClass }}" target="{{ item.linkTarget }}" rel="{{ item.linkRel }}" referrerpolicy="origin-when-cross-origin">
-            {% if item.icon is not empty %}<i class="menu-icon fa-fw {{ item.icon }}"></i>{% endif %}
+            {% if item.icon is not empty %}<i class="menu-icon fa-fw {{ item.icon }} fa-lg"></i>{% endif %}
             <span>{{ item.label }}</span>
             {% if item.hasSubItems %}<i class="fa fa-fw fa-angle-right treeview-icon"></i>{% endif %}
         </a>
