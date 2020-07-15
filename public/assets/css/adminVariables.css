@@ -60,7 +60,7 @@
     --text-red-600: hsl(338, 71%, 37%);
     --text-yellow-600: hsl(20, 94%, 30%);
 
-    --color-primary: hsl(230, 55%, 60%);
+    --color-primary: rgb(46, 196, 182);
     --color-success: hsl(157, 69%, 38%);
     --color-info: hsl(201, 94%, 37%);
     --color-warning: hsl(30, 81%, 47%);

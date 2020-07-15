@@ -66,15 +66,15 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Départements', '', Department::class),
                 MenuItem::linkToCrud('Villes', '', City::class),
             ]),
-            
+
             MenuItem::linkToCrud('Public', 'fa fa-users', Audience::class),
 
             MenuItem::subMenu('Catégories', 'fa fa-calendar')->setSubItems([
                 MenuItem::linkToCrud('Catégories', '', Category::class),
                 MenuItem::linkToCrud('Labels', '', Review::class),
                 MenuItem::linkToCrud('Etiquettes', '', Tag::class),
-                ]),
-            
+            ]),
+
             MenuItem::subMenu('Périodes', 'fa fa-tags')->setSubItems([
                 MenuItem::linkToCrud('Périodes', '', Period::class),
                 MenuItem::linkToCrud('Jours', '', Days::class),
@@ -86,9 +86,8 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Commentaires', '', Comment::class),
                 MenuItem::linkToExitImpersonation('Arrêtez l\'emprunt d\'identité', ''),
             ]),
-    
-        ];
 
+        ];
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
@@ -123,34 +122,30 @@ class DashboardController extends AbstractDashboardController
                 'layout' => 'bundles/easyAdminBundle/default/layout.html.twig',
                 'main_menu' => 'bundles/easyAdminBundle/default/menu.html.twig',
 
-            ])
-        ;
+            ]);
     }
 
     public function configureAssets(): Assets
     {
         return Assets::new()
 
-        // My custom CSS
-        ->addCssFile('assets/css/adminLayout.css')
-        ->addCssFile('assets/css/adminMenu.css')
-        ->addCssFile('assets/css/adminVariables.css')
+            // My custom CSS
+            ->addCssFile('assets/css/adminLayout.css')
+            ->addCssFile('assets/css/adminMenu.css')
+            ->addCssFile('assets/css/adminVariables.css')
 
 
 
-        // HEAD : Bootstrap CSS CDN
-        ->addHtmlContentToHead('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">')
-        // HEAD : Font Awesome JS
-        ->addHtmlContentToHead('<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">')
-        ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>')
-        ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>')
-        
-        // BODY : JQuery.js
-        ->addHtmlContentToBody('<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>')
-        // BODY : POppers.js
-        ->addHtmlContentToBody('<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>');
-        
+            // HEAD : Bootstrap CSS CDN
+            // ->addHtmlContentToHead('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">')
+            // HEAD : Font Awesome JS
+            ->addHtmlContentToHead('<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">')
+            ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>')
+            ->addHtmlContentToHead('<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>')
+
+            // BODY : JQuery.js
+            ->addHtmlContentToBody('<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>')
+            // BODY : POppers.js
+            ->addHtmlContentToBody('<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>');
     }
-
-
 }

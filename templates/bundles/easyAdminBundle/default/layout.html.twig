@@ -66,6 +66,8 @@ localStorage.getItem('ea/sidebar/width') || 'normal'
 				{% endblock flash_messages %}
 				<div class="wrapper">
 					{% block wrapper %}
+
+						{# TOPBAR - Style in AdminLayout.css #}
                 		<header class="topbar" data-navbarbg="skin6">
 							{% block header %}
 								<nav class="navbar top-navbar navbar-expand-md navbar-light" role="navigation">
@@ -159,7 +161,9 @@ localStorage.getItem('ea/sidebar/width') || 'normal'
 								</nav>
 							{% endblock header %}
 						</header>
+						{# END TOPBAR #}
 
+						{# LEFT SIDEBAR  - Style in AdminMenu.css #}
 						<aside class="left-sidebar">
 							{% block sidebar %}
 								<div class="scroll-sidebar ps-container ps-theme-default ps-active-y">
@@ -169,58 +173,76 @@ localStorage.getItem('ea/sidebar/width') || 'normal'
 								</div>
 							{% endblock sidebar %}
 						</aside>
+						{# END LEFT SIDEBAR #}
 
-						<div class="content-wrapper">
-							<div id="sidebar-resizer-handler" class="resizer-handler resizer-handler-left"></div>
-
+						{# PAGE WRAPPER	 #}
+						<div class="page-wrapper">
 							{% block content %}
 								<div class="content">
 									{% block content_header_wrapper %}
 										{% set has_help_message = (ea.crud.helpMessage ?? '') is not empty %}
-										<section class="content-header">
+										<div class="page-breadcrumb">
 											{% block content_header %}
-												<div class="d-flex flex-row justify-content-between align-content-center w-100">
-													<div class="content-header-title">
-														<h1 class="title">
+												<div class="row">
+													<div class="col-5">
+														<h3 class="page-title text-truncate text-dark font-weight-medium mb-1">
 															{% block content_title %}{% endblock %}
+														</h3>
 
-															{% block content_help %}
+														<div class="d-flex align-items-center">
+														    <nav aria-label="breadcrumb">
+                                        					    <ol class="breadcrumb m-0 p-0">
+
+															{# {% block content_help %} #}
 																{% if has_help_message %}
-																	<span class="content-header-help">
-																		<i class="far fa-question-circle" data-toggle="tooltip" title="{{ ea.crud.helpMessage|e('html_attr') }}"></i>
-																	</span>
+																	<li class="breadcrumb-item">
+																		<a class="far fa-question-circle" data-toggle="tooltip" title="{{ ea.crud.helpMessage|e('html_attr') }}"></a>
+																	</li>
 																{% endif %}
-															{% endblock %}
-														</h1>
+															{# {% endblock %} #}
+														        </ol>
+                                        					</nav>
+                                    					</div>
+														
 													</div>
 
-													{% block page_actions_wrapper %}
-														<div class="page-actions">
-															{% block page_actions %}{% endblock %}
-														</div>
-													{% endblock %}
+													<div class="col-7">
+														{% block page_actions_wrapper %}
+															<div class="global-actions">{% block page_actions %}{% endblock %}</div>
+														{% endblock %}
+													</div>
 												</div>
 											{% endblock content_header %}
-										</section>
+										</div>
 									{% endblock content_header_wrapper %}
 
-									<section id="main" class="content-body">
-										{% block main %}{% endblock %}
-									</section>
+									 <div class="container-fluid">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="card">
+													<div class="card-body">
+														<section id="main" class="content-body">
+															{% block main %}{% endblock %}
+														</section>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 
 									{% block content_footer_wrapper %}
 										{% set content_footer = block('content_footer') is defined ? block('content_footer') : '' %}
 										{% if content_footer is not empty %}
-											<section class="content-footer">
+											<div class="card-footer">
 												{{ content_footer }}
-											</section>
+											</div>
 										{% endif %}
 									{% endblock %}
 								</div>
 							{% endblock content %}
-
-							<div id="content-resizer-handler" class="resizer-handler resizer-handler-right"></div>
 						</div>
+						{# END PAGE WRAPPER #}
+
 					{% endblock wrapper %}
 				</div>
 			</div>
